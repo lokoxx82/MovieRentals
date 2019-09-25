@@ -33,6 +33,12 @@ namespace MovieRentals.Controllers
             return View(viewModel);
         }
 
+        //New customer
+        public ActionResult New()
+        {
+            List<MembershipType> membershipTypes = _context.MembershipTypes.ToList();
+            return View();
+        }
         
 
         //Show customer details

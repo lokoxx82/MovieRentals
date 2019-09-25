@@ -8,16 +8,29 @@
 <h2>Customers</h2>
 @if (Model.Customers.Count() == 0)
 {
-    <h2> We dont have eny customers yet</h2>
+    <p> We dont have eny customers yet</p>
 }
 else
 {
-    foreach (Customer customer in Model.Customers)
-    {
-    <li>
-        @Html.ActionLink(customer.Name, "Detail", "Customers",new {customer.Id}, null)
-    </li>
-    }
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Discount rate</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (Customer customer in Model.Customers)
+            {
+                <tr>
+                    <td>@Html.ActionLink(customer.Name,"Detail","Customers", new {customer.Id},null)</td>
+                    <td>@customer.MembershipType.DiscountRate.ToString() %</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
 }
 
 

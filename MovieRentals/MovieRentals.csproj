@@ -187,6 +187,22 @@
     <Compile Include="Migrations\201909251516449_AddMembershipType.Designer.cs">
       <DependentUpon>201909251516449_AddMembershipType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909251521597_PopulateMembershipTypes.cs" />
+    <Compile Include="Migrations\201909251521597_PopulateMembershipTypes.Designer.cs">
+      <DependentUpon>201909251521597_PopulateMembershipTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251528351_UpdateSignUpFee.cs" />
+    <Compile Include="Migrations\201909251528351_UpdateSignUpFee.Designer.cs">
+      <DependentUpon>201909251528351_UpdateSignUpFee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251529518_UpdateMembershipTypesToDb2Try.cs" />
+    <Compile Include="Migrations\201909251529518_UpdateMembershipTypesToDb2Try.Designer.cs">
+      <DependentUpon>201909251529518_UpdateMembershipTypesToDb2Try.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251544311_CustomerNameApplyAnotations.cs" />
+    <Compile Include="Migrations\201909251544311_CustomerNameApplyAnotations.Designer.cs">
+      <DependentUpon>201909251544311_CustomerNameApplyAnotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -286,6 +302,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909251516449_AddMembershipType.resx">
       <DependentUpon>201909251516449_AddMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251521597_PopulateMembershipTypes.resx">
+      <DependentUpon>201909251521597_PopulateMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251528351_UpdateSignUpFee.resx">
+      <DependentUpon>201909251528351_UpdateSignUpFee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251529518_UpdateMembershipTypesToDb2Try.resx">
+      <DependentUpon>201909251529518_UpdateMembershipTypesToDb2Try.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251544311_CustomerNameApplyAnotations.resx">
+      <DependentUpon>201909251544311_CustomerNameApplyAnotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

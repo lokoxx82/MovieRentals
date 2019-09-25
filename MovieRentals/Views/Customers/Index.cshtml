@@ -1,0 +1,24 @@
+﻿@using MovieRentals.Models
+@model MovieRentals.ViewModels.CustomersViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+@if (Model.Customers.Count() == 0)
+{
+    <h2> We dont have eny customers yet</h2>
+}
+else
+{
+    foreach (Customer customer in Model.Customers)
+    {
+    <li>
+        @Html.ActionLink(customer.Name, "Detail", "Customers",new {customer.Id}, null)
+    </li>
+    }
+}
+
+
+

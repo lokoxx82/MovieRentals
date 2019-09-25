@@ -10,6 +10,19 @@ namespace MovieRentals.Controllers
 {
     public class MoviesController : Controller
     {
+        //Index list of movies
+        public ActionResult Index()
+        {
+            List<Movie> movies = new List<Movie>
+            {
+                new Movie{Id = 1,Name = "Kill bill"},
+                new Movie{Id = 2,Name = "Kill bill 2"}
+
+            };
+            MovieViewModel viewModel = new MovieViewModel{Movies = movies};
+            return View(viewModel);
+        }
+
         // GET: Random movie
         public ActionResult Random()
         {

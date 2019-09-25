@@ -6,7 +6,7 @@ using MovieRentals.Models;
 
 namespace MovieRentals.ViewModels
 {
-    public class MovieViewModel
+    public class MoviesViewModel
     {
         public IEnumerable<Movie> Movies { get; set; }
     }

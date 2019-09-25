@@ -27,7 +27,7 @@ namespace MovieRentals.Controllers
         public ActionResult Index()
         {
             List<Movie> movies = _context.Movies.Include(x=>x.Genre).ToList();
-            MovieViewModel viewModel = new MovieViewModel{Movies = movies};
+            MoviesViewModel viewModel = new MoviesViewModel{Movies = movies};
             return View(viewModel);
         }
 

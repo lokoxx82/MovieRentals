@@ -211,9 +211,38 @@
     <Compile Include="Migrations\201909251614558_UpdateMembershipTypesTableValues.Designer.cs">
       <DependentUpon>201909251614558_UpdateMembershipTypesTableValues.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909251626051_AddedCustomerBirthDate.cs" />
+    <Compile Include="Migrations\201909251626051_AddedCustomerBirthDate.Designer.cs">
+      <DependentUpon>201909251626051_AddedCustomerBirthDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251705368_AddingGenreTypes.cs" />
+    <Compile Include="Migrations\201909251705368_AddingGenreTypes.Designer.cs">
+      <DependentUpon>201909251705368_AddingGenreTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251705584_AddGenreTypesToDb.cs" />
+    <Compile Include="Migrations\201909251705584_AddGenreTypesToDb.Designer.cs">
+      <DependentUpon>201909251705584_AddGenreTypesToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251707409_AddGenreTypesNr2.cs" />
+    <Compile Include="Migrations\201909251707409_AddGenreTypesNr2.Designer.cs">
+      <DependentUpon>201909251707409_AddGenreTypesNr2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251718444_UpdateDbForModel.cs" />
+    <Compile Include="Migrations\201909251718444_UpdateDbForModel.Designer.cs">
+      <DependentUpon>201909251718444_UpdateDbForModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251732349_ExtendedMovieModel.cs" />
+    <Compile Include="Migrations\201909251732349_ExtendedMovieModel.Designer.cs">
+      <DependentUpon>201909251732349_ExtendedMovieModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909251737044_MoviePropsAreRequired.cs" />
+    <Compile Include="Migrations\201909251737044_MoviePropsAreRequired.Designer.cs">
+      <DependentUpon>201909251737044_MoviePropsAreRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\GenreType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -284,6 +313,7 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\Detail.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Movies\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,6 +358,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909251614558_UpdateMembershipTypesTableValues.resx">
       <DependentUpon>201909251614558_UpdateMembershipTypesTableValues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251626051_AddedCustomerBirthDate.resx">
+      <DependentUpon>201909251626051_AddedCustomerBirthDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251705368_AddingGenreTypes.resx">
+      <DependentUpon>201909251705368_AddingGenreTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251705584_AddGenreTypesToDb.resx">
+      <DependentUpon>201909251705584_AddGenreTypesToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251707409_AddGenreTypesNr2.resx">
+      <DependentUpon>201909251707409_AddGenreTypesNr2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251718444_UpdateDbForModel.resx">
+      <DependentUpon>201909251718444_UpdateDbForModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251732349_ExtendedMovieModel.resx">
+      <DependentUpon>201909251732349_ExtendedMovieModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251737044_MoviePropsAreRequired.resx">
+      <DependentUpon>201909251737044_MoviePropsAreRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

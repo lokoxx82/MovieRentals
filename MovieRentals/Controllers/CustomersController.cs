@@ -39,6 +39,7 @@ namespace MovieRentals.Controllers
         public ActionResult Detail(int id)
         {
             Customer customer = _context.Customers.FirstOrDefault(x=>x.Id==id);
+            customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.MembershipTypeId);
             return View(customer);
         }
 

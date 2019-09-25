@@ -5,47 +5,41 @@ using System.Web;
 using System.Web.Mvc;
 using MovieRentals.Models;
 using MovieRentals.ViewModels;
+using System.Data.Entity;
 
 namespace MovieRentals.Controllers
 {
     public class MoviesController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         //Index list of movies
         public ActionResult Index()
         {
-            List<Movie> movies = new List<Movie>
-            {
-                new Movie{Id = 1,Name = "Kill bill"},
-                new Movie{Id = 2,Name = "Kill bill 2"}
-
-            };
+            List<Movie> movies = _context.Movies.Include(x=>x.Genre).ToList();
             MovieViewModel viewModel = new MovieViewModel{Movies = movies};
             return View(viewModel);
         }
 
-        // GET: Random movie
-        public ActionResult Random()
+
+        //Detail of a movie
+        public ActionResult Detail(int id)
         {
-            List<Movie> movies = new List<Movie>
-            {
-                new Movie{Id = 1,Name = "Kill bill"},
-                new Movie{Id = 2,Name = "Kill bill 2"}
-                
-            };
-
-            List<Customer> customers = new List<Customer>
-            {
-                new Customer{Id = 1, Name = "Fero"},
-                new Customer{Id = 2,Name = "Jozo"}
-            };
-
-            RandomViewModel viewModel = new RandomViewModel
-            {
-                Customers = customers,
-                Movie = movies[1]
-            };
-            return View(viewModel);
+            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            movie.Genre = _context.GenreTypes.FirstOrDefault(x => x.Id == movie.Id);
+            return View(movie);
         }
+
 
         //Edit a movie
         public ActionResult Edit(int id)

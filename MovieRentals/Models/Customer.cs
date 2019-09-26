@@ -10,7 +10,7 @@ namespace MovieRentals.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a name")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -22,7 +22,7 @@ namespace MovieRentals.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name = "Date of birth")]
-
+        [Min18YersIfAMember]
         public DateTime? BirthDate { get; set; }
     }
 }

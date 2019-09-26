@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MovieRentals.ViewModels;
 using System.Data.Entity;
+using System.Web.UI.WebControls;
 
 namespace MovieRentals.Controllers
 {
@@ -30,7 +31,7 @@ namespace MovieRentals.Controllers
         {
             CustomersViewModel viewModel = new CustomersViewModel
             {
-                Customers = _context.Customers.Include(c => c.MembershipType).ToList()
+                Customers = _context.Customers.Include(c => c.MembershipType).OrderBy(x=>x.Name).ToList()
         };
             return View(viewModel);
         }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MovieRentals.Models;
 using MovieRentals.ViewModels;
 using System.Data.Entity;
+using System.Web.UI.WebControls;
 
 namespace MovieRentals.Controllers
 {
@@ -26,7 +27,7 @@ namespace MovieRentals.Controllers
         //Index list of movies
         public ActionResult Index()
         {
-            List<Movie> movies = _context.Movies.Include(x=>x.Genre).ToList();
+            List<Movie> movies = _context.Movies.Include(x=>x.Genre).OrderBy(x=>x.Name).ToList();
             MoviesViewModel viewModel = new MoviesViewModel{Movies = movies};
             return View(viewModel);
         }
@@ -34,7 +35,11 @@ namespace MovieRentals.Controllers
         //New movie
         public ActionResult New()
         {
-            MovieFormViewModel viewModel = new MovieFormViewModel{GenreTypes = _context.GenreTypes.ToList()};
+            MovieFormViewModel viewModel = new MovieFormViewModel
+            {
+                GenreTypes = _context.GenreTypes.ToList(),
+                Movie = new Movie()
+            };
             return View("MovieForm", viewModel);
         }
 
@@ -55,6 +60,7 @@ namespace MovieRentals.Controllers
 
         //Save the movie
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
             movie.Genre = _context.GenreTypes.FirstOrDefault(x => x.Id == movie.GenreTypeId);

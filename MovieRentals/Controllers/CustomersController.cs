@@ -38,9 +38,8 @@ namespace MovieRentals.Controllers
         //New customer
         public ActionResult New()
         {
-            List<MembershipType> membershipTypes = _context.MembershipTypes.ToList();
-            CustomerFormViewModel formViewModel = new CustomerFormViewModel{MembershipTypes = membershipTypes};
-            return View("CustomerForm",formViewModel);
+            CustomerFormViewModel viewModel = new CustomerFormViewModel{MembershipTypes = _context.MembershipTypes.ToList() };
+            return View("CustomerForm",viewModel);
         }
 
         //Save a new customer
@@ -71,6 +70,7 @@ namespace MovieRentals.Controllers
         {
             Customer customer = _context.Customers.SingleOrDefault(x => x.Id == id);
             if (customer == null) return HttpNotFound();
+
             customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.Id);
             CustomerFormViewModel formViewModel = new CustomerFormViewModel
             {

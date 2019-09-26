@@ -31,6 +31,52 @@ namespace MovieRentals.Controllers
             return View(viewModel);
         }
 
+        //New movie
+        public ActionResult New()
+        {
+            MovieFormViewModel viewModel = new MovieFormViewModel{GenreTypes = _context.GenreTypes.ToList()};
+            return View("MovieForm", viewModel);
+        }
+
+        //Edit a movie
+        public ActionResult Edit(int id)
+        {
+            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            if (movie == null) return HttpNotFound();
+
+            movie.Genre = _context.GenreTypes.FirstOrDefault(x => x.Id == movie.GenreTypeId);
+            MovieFormViewModel viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                GenreTypes = _context.GenreTypes
+            };
+            return View("MovieForm", viewModel);
+        }
+
+        //Save the movie
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            movie.Genre = _context.GenreTypes.FirstOrDefault(x => x.Id == movie.GenreTypeId);
+            movie.DateAdded = DateTime.Today;
+            if (movie.Id == 0)
+            {
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                Movie movieInDb = _context.Movies.Single(x => x.Id == movie.Id);
+                movieInDb.Name = movie.Name;
+                movieInDb.Genre = movie.Genre;
+                movieInDb.GenreTypeId = movie.GenreTypeId;
+                movieInDb.NumberInStock = movie.NumberInStock;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.DateAdded = movie.DateAdded;
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
+        }
 
         //Detail of a movie
         public ActionResult Detail(int id)
@@ -41,17 +87,13 @@ namespace MovieRentals.Controllers
         }
 
 
-        //Edit a movie
-        public ActionResult Edit(int id)
-        {
-            return Content(id.ToString());
-        }
-
         [Route("movies/released/{year:regex(\\d{4})}/{month:regex(\\d{2}):range(1,12)}")]
         public ActionResult ByReleaseDate(int year, int month)
         {
 
             return Content(year + "   " + month);
         }
+
+        
     }
 }

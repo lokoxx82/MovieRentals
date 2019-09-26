@@ -39,20 +39,46 @@ namespace MovieRentals.Controllers
         public ActionResult New()
         {
             List<MembershipType> membershipTypes = _context.MembershipTypes.ToList();
-            NewCustomerViewModel viewModel = new NewCustomerViewModel{MembershipTypes = membershipTypes};
-            return View(viewModel);
+            CustomerFormViewModel formViewModel = new CustomerFormViewModel{MembershipTypes = membershipTypes};
+            return View("CustomerForm",formViewModel);
         }
 
-        //Create a new customer
+        //Save a new customer
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
             customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.MembershipTypeId);
-            _context.Customers.Add(customer);
+            if (customer.Id == 0)
+            {
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                Customer customerInDb = _context.Customers.Single(x => x.Id == customer.Id);
+                customerInDb.MembershipType = customer.MembershipType;
+                customerInDb.BirthDate = customer.BirthDate;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.Name = customer.Name;
+            }
+            
             _context.SaveChanges();
             return RedirectToAction("Index", "Customers");
         }
 
+        //To edit a customer
+        public ActionResult Edit(int id)
+        {
+            Customer customer = _context.Customers.SingleOrDefault(x => x.Id == id);
+            if (customer == null) return HttpNotFound();
+            customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.Id);
+            CustomerFormViewModel formViewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes
+            };
+            return View("CustomerForm", formViewModel);
+        }
 
         //Show customer details
         public ActionResult Detail(int id)
@@ -62,5 +88,6 @@ namespace MovieRentals.Controllers
             return View(customer);
         }
 
+        
     }
 }

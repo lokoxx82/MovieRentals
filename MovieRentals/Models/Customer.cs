@@ -22,6 +22,7 @@ namespace MovieRentals.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name = "Date of birth")]
+
         public DateTime? BirthDate { get; set; }
     }
 }

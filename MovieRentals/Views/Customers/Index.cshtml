@@ -1,27 +1,27 @@
 ﻿@using MovieRentals.Models
-@model MovieRentals.ViewModels.CustomersViewModel
+@*@model MovieRentals.ViewModels.CustomersViewModel*@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Customers</h2>
-@if (Model.Customers.Count() == 0)
+@*@if (Model.Customers.Count() == 0)
 {
     <p> We dont have eny customers yet</p>
 }
 else
-{
+{*@
     <table id="customers" class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>Customer</th>
-            <th>Discount rate</th>
+            <th>Membership type</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-            @foreach (Customer customer in Model.Customers)
+            @*@foreach (Customer customer in Model.Customers)
             {
                 <tr>
                     <td>@Html.ActionLink(customer.Name,"Edit","Customers", new {customer.Id},null)</td>
@@ -32,18 +32,41 @@ else
                         </button>
                     </td>
                 </tr>
-            }
+            }*@
         </tbody>
 
     </table>
 
-}
+@*}*@
+
 @section scripts
 {
     <script>
         $(document).ready(function () {
             //Add DataTable CSS
-            $("#customers").dataTable();
+            $("#customers").dataTable({
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc:""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data,type,customer) {
+                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
 
             $("#customers").on("click",".js - delete",
                 function () {

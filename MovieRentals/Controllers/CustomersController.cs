@@ -29,11 +29,12 @@ namespace MovieRentals.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            CustomersViewModel viewModel = new CustomersViewModel
-            {
-                Customers = _context.Customers.Include(c => c.MembershipType).OrderBy(x=>x.Name).ToList()
-        };
-            return View(viewModel);
+            //CustomersViewModel viewModel = new CustomersViewModel
+            //{
+            //    Customers = _context.Customers.Include(c => c.MembershipType).OrderBy(x=>x.Name).ToList()
+            //};
+            //return View(viewModel);
+            return View();
         }
 
         //New customer

@@ -53,7 +53,7 @@ namespace MovieRentals.Controllers.Api
             }
 
             Customer customer = Mapper.Map<CustomerDto, Customer>(customerDto);
-            customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.Id);
+            customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.MembershipTypeId);
             _context.Customers.Add(customer);
             _context.SaveChanges();
 

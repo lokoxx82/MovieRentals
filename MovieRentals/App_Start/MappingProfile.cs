@@ -17,6 +17,7 @@ namespace MovieRentals.App_Start
             Mapper.CreateMap<Movie, MovieDto>();
             Mapper.CreateMap<MovieDto, Movie>().ForMember(x => x.Id, opt => opt.Ignore());
             Mapper.CreateMap<MembershipType, MembershipTypeDto>();
+            Mapper.CreateMap<MembershipTypeDto, MembershipType>();
         }
     }
 }

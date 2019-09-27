@@ -4,6 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using MovieRentals.Dtos;
 using MovieRentals.Models;
 
 namespace MovieRentals.Controllers.Api
@@ -24,51 +27,51 @@ namespace MovieRentals.Controllers.Api
 
         //Action to get customers
         //GET/Api/Customers
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList();
+            return _context.Customers.ToList().Select(Mapper.Map<Customer,CustomerDto>);
         }
 
         //Action to get a single customer
         //Get/Api/Customers/1
-        public Customer GetCustomer(int id)
+        public CustomerDto GetCustomer(int id)
         {
             Customer customer = _context.Customers.FirstOrDefault(x => x.Id == id);
             if (customer == null) { throw  new HttpResponseException(HttpStatusCode.NotFound);}
 
-            return customer;
+            return Mapper.Map<Customer, CustomerDto>(customer);
         }
 
         //create a customer
         //POST/api/customers
         [HttpPost]
-        public Customer CreateCustomer(Customer customer)
+        public CustomerDto CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
             {
                 throw  new HttpResponseException(HttpStatusCode.BadRequest);
             }
+
+            Customer customer = Mapper.Map<CustomerDto, Customer>(customerDto);
+            customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.Id);
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
-            return customer;
+            customerDto.Id = customer.Id;
+            return customerDto;
         }
 
         //Update an existing customer
         //PUT/api/customers/1
         [HttpPut]
-        public void UpdateCustomer(int id, Customer customer)
+        public void UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid) { throw  new HttpResponseException(HttpStatusCode.BadRequest);}
 
             Customer customerInDb = _context.Customers.SingleOrDefault(x => x.Id == id);
             if (customerInDb == null) { throw  new  HttpResponseException(HttpStatusCode.NotFound);}
 
-            customerInDb.Name = customer.Name;
-            customerInDb.BirthDate = customer.BirthDate;
-            customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
-            customerInDb.MembershipTypeId = customer.MembershipTypeId;
-
+            Mapper.Map(customerDto, customerInDb);
             _context.SaveChanges();
         }
 

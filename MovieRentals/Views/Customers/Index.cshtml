@@ -41,7 +41,10 @@ else
 @section scripts
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            //Add DataTable CSS
+            $("#customers").dataTable();
+
             $("#customers").on("click",".js - delete",
                 function () {
                     var button = $(this);

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
+using System.Data.Entity;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MovieRentals.Dtos;
 using MovieRentals.Models;
+using System.Web.Http;
 
 namespace MovieRentals.Controllers.Api
 {
@@ -29,7 +30,10 @@ namespace MovieRentals.Controllers.Api
         //GET/Api/Customers
         public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList().Select(Mapper.Map<Customer,CustomerDto>);
+            return _context.Customers
+                .Include(x=>x.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer,CustomerDto>);
         }
 
         //Action to get a single customer

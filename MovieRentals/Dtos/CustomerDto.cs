@@ -19,7 +19,7 @@ namespace MovieRentals.Dtos
 
         public byte MembershipTypeId { get; set; }
 
-        [Min18YersIfAMember]
+        //[Min18YersIfAMember]
         public DateTime? BirthDate { get; set; }
     }
 }

@@ -34,22 +34,22 @@ namespace MovieRentals.Controllers.Api
 
         //Action to get a single customer
         //Get/Api/Customers/1
-        public CustomerDto GetCustomer(int id)
+        public IHttpActionResult GetCustomer(int id)
         {
             Customer customer = _context.Customers.FirstOrDefault(x => x.Id == id);
-            if (customer == null) { throw  new HttpResponseException(HttpStatusCode.NotFound);}
+            if (customer == null) { return  NotFound();}
 
-            return Mapper.Map<Customer, CustomerDto>(customer);
+            return Ok(Mapper.Map<Customer, CustomerDto>(customer));
         }
 
         //create a customer
         //POST/api/customers
         [HttpPost]
-        public CustomerDto CreateCustomer(CustomerDto customerDto)
+        public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
             {
-                throw  new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
             }
 
             Customer customer = Mapper.Map<CustomerDto, Customer>(customerDto);
@@ -58,7 +58,7 @@ namespace MovieRentals.Controllers.Api
             _context.SaveChanges();
 
             customerDto.Id = customer.Id;
-            return customerDto;
+            return Created(new Uri(Request.RequestUri + "/" + customerDto.Id), customerDto);
         }
 
         //Update an existing customer

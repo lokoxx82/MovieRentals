@@ -1,0 +1,58 @@
+﻿@using MovieRentals.Models
+@*@model MovieRentals.ViewModels.MoviesViewModel*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+@*@if (Model.Movies.Count() == 0)
+{
+    <h2>We dont have eny movies</h2>
+}
+else
+{*@
+
+    <table id="movies" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Genre</th>
+        </tr>
+        </thead>
+        <tbody>
+        @*@foreach (Movie movie in Model.Movies)
+        {
+            <tr>
+                <th>@Html.ActionLink(movie.Name,"Edit","Movies",new {movie.Id},null)</th>
+                <th>@movie.Genre.Name</th>
+            </tr>
+        }*@
+        </tbody>
+    </table>
+@*}*@
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            //Add datatable CSS
+            var table = $("#movies").DataTable({
+                ajax: {
+                    url: "/api/movies",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "genre.name"
+                    }
+                ]
+            });
+        });
+    </script>
+}
+
+

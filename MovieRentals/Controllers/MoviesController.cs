@@ -29,10 +29,17 @@ namespace MovieRentals.Controllers
         {
             List<Movie> movies = _context.Movies.Include(x=>x.Genre).OrderBy(x=>x.Name).ToList();
             MoviesViewModel viewModel = new MoviesViewModel{Movies = movies};
-            return View(viewModel);
+
+            if (User.IsInRole(RoleName.CanManageMovies))
+            {
+                return View("List", viewModel);
+            }
+
+            return View("ReadOnlyList", viewModel);
         }
 
         //New movie
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             MovieFormViewModel viewModel = new MovieFormViewModel
@@ -44,6 +51,7 @@ namespace MovieRentals.Controllers
         }
 
         //Edit a movie
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
@@ -61,6 +69,7 @@ namespace MovieRentals.Controllers
         //Save the movie
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             movie.Genre = _context.GenreTypes.FirstOrDefault(x => x.Id == movie.GenreTypeId);

@@ -45,6 +45,7 @@ namespace MovieRentals.Controllers.Api
 
         //Create a movie
         //POST/api/movies
+        [Authorize(Roles = RoleName.CanManageMovies)]
         [HttpPost]
         public IHttpActionResult CreateMovie(MovieDto movieDto)
         {
@@ -61,6 +62,7 @@ namespace MovieRentals.Controllers.Api
 
         //Update existing movie
         //PUT/api/movies/1
+        [Authorize(Roles = RoleName.CanManageMovies)]
         [HttpPut]
         public void UpdateMovie(int id, MovieDto movieDto)
         {
@@ -77,6 +79,7 @@ namespace MovieRentals.Controllers.Api
         //Delete movie
         //DELETE/api/movies/1
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public void DeleteMovie(int id)
         {
             Movie movieInDb = _context.Movies.FirstOrDefault(x => x.Id == id);

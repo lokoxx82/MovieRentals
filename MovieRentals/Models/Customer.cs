@@ -16,6 +16,7 @@ namespace MovieRentals.Models
 
         public bool IsSubscribedToNewsletter { get; set; }
 
+        [Required]
         public MembershipType MembershipType { get; set; }
 
         [Display(Name = "Membership type")]

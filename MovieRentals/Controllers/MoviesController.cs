@@ -67,6 +67,7 @@ namespace MovieRentals.Controllers
             movie.DateAdded = DateTime.Today;
             if (movie.Id == 0)
             {
+                movie.ReleaseDate = DateTime.Today;
                 _context.Movies.Add(movie);
             }
             else

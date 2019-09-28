@@ -14,10 +14,15 @@ namespace MovieRentals.App_Start
         {
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<CustomerDto,Customer>().ForMember(x => x.Id, opt => opt.Ignore());
+
             Mapper.CreateMap<Movie, MovieDto>();
             Mapper.CreateMap<MovieDto, Movie>().ForMember(x => x.Id, opt => opt.Ignore());
+
             Mapper.CreateMap<MembershipType, MembershipTypeDto>();
             Mapper.CreateMap<MembershipTypeDto, MembershipType>();
+
+            Mapper.CreateMap<GenreType, GenreTypeDto>();
+            Mapper.CreateMap<GenreTypeDto, GenreType>();
         }
     }
 }

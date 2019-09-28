@@ -15,6 +15,7 @@ namespace MovieRentals.Dtos
         [Required]
         public string Name { get; set; }
 
+        public GenreTypeDto Genre { get; set; }
         [Required]
         [Display(Name = "Genre")]
         public byte GenreTypeId { get; set; }

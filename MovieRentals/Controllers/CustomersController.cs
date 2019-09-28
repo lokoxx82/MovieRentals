@@ -49,16 +49,18 @@ namespace MovieRentals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
-            if (!ModelState.IsValid)
-            {
-                CustomerFormViewModel viewModel = new CustomerFormViewModel
-                {
-                    Customer = customer,
-                    MembershipTypes = _context.MembershipTypes
-                };
-                return View("CustomerForm", viewModel);}
-
             customer.MembershipType = _context.MembershipTypes.FirstOrDefault(x => x.Id == customer.MembershipTypeId);
+            //if (!ModelState.IsValid)
+            //{
+            //    CustomerFormViewModel viewModel = new CustomerFormViewModel
+            //    {
+            //        Customer = customer,
+            //        MembershipTypes = _context.MembershipTypes.ToList()
+            //    };
+            //    return View("CustomerForm", viewModel);
+
+            //}
+
             if (customer.Id == 0)
             {
                 _context.Customers.Add(customer);

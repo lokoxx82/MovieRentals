@@ -28,6 +28,7 @@ namespace MovieRentals.Controllers.Api
 
         //Get movies
         //GET/api/movies
+        [Authorize]
         public IEnumerable<MovieDto> GetMovies()
         {
             return _context.Movies.Include(x=>x.Genre).ToList().Select(Mapper.Map<Movie, MovieDto>);
@@ -35,6 +36,7 @@ namespace MovieRentals.Controllers.Api
 
         //get movie by id
         //GET/api/movies/id
+        [Authorize]
         public IHttpActionResult GetMovie(int id)
         {
             Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);

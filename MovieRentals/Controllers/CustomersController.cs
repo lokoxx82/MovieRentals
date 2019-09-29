@@ -30,12 +30,15 @@ namespace MovieRentals.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            if (MemoryCache.Default["MembershipTypes"]==null)
-            {
-                MemoryCache.Default["MembershipTypes"] = _context.MembershipTypes.ToList();
-            } ;
-            IEnumerable<MembershipType> membershipTypes = (IEnumerable<MembershipType>)MemoryCache.Default["MembershipTypes"];
+            //Blocks used to set slective caching to data
+            //if (MemoryCache.Default["MembershipTypes"]==null)
+            //{
+            //    MemoryCache.Default["MembershipTypes"] = _context.MembershipTypes.ToList();
+            //} ;
+            //IEnumerable<MembershipType> membershipTypes = (IEnumerable<MembershipType>)MemoryCache.Default["MembershipTypes"];
 
+
+            //No need to send data
             //CustomersViewModel viewModel = new CustomersViewModel
             //{
             //    Customers = _context.Customers.Include(c => c.MembershipType).OrderBy(x=>x.Name).ToList()

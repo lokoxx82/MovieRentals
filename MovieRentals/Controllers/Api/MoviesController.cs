@@ -30,17 +30,18 @@ namespace MovieRentals.Controllers.Api
         //Get movies
         //GET/api/movies
         [Authorize]
-        public IHttpActionResult GetMovies(string query = null)
+        public IEnumerable<MovieDto> GetMovies(string query = null)
         {
-            IQueryable<Movie> moviesQuery = _context.Movies.Include(x => x.Genre);
+            IQueryable<Movie> moviesQuery = _context.Movies.Include(x => x.Genre).Where(y => y.NumberAvailable > 0);
 
             if (!query.IsNullOrWhiteSpace())
             {
-                moviesQuery = moviesQuery.Where(x => x.Name.Contains(query)).Where(y=>y.NumberAvailable>0);
+                moviesQuery = moviesQuery.Where(x => x.Name.Contains(query));
             }
 
-            IEnumerable<MovieDto> movieDtos = moviesQuery.ToList().Select(Mapper.Map<Movie, MovieDto>);
-            return Ok(movieDtos);
+            return moviesQuery
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDto>);
         }
 
         //get movie by id

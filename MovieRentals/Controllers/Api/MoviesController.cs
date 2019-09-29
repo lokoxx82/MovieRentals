@@ -55,6 +55,8 @@ namespace MovieRentals.Controllers.Api
 
             Movie movie = Mapper.Map<MovieDto, Movie>(movieDto);
             movie.Genre = _context.GenreTypes.FirstOrDefault(x => x.Id == movie.GenreTypeId);
+            movie.NumberAvailable = movie.NumberInStock;
+
             _context.Movies.Add(movie);
             _context.SaveChanges();
 
@@ -73,6 +75,11 @@ namespace MovieRentals.Controllers.Api
             Movie movieInDb = _context.Movies.SingleOrDefault(x => x.Id == id);
             if (movieInDb == null) { throw  new  HttpResponseException(HttpStatusCode.NotFound);}
 
+            //If stock amount changes then change the available movie count
+            if (movieDto.NumberInStock != movieInDb.NumberInStock)
+            {
+                movieInDb.NumberAvailable -= movieInDb.NumberInStock - movieDto.NumberInStock;
+            }
             Mapper.Map(movieDto,movieInDb);
             //movieInDb.Genre = _context.GenreTypes.FirstOrDefault(x => x.Id == movieInDb.GenreTypeId);
             _context.SaveChanges();

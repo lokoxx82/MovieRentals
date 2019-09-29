@@ -77,6 +77,7 @@ namespace MovieRentals.Controllers
             if (movie.Id == 0)
             {
                 movie.ReleaseDate = DateTime.Today;
+                movie.NumberAvailable = movie.NumberInStock;
                 _context.Movies.Add(movie);
             }
             else
@@ -85,9 +86,13 @@ namespace MovieRentals.Controllers
                 movieInDb.Name = movie.Name;
                 movieInDb.Genre = movie.Genre;
                 movieInDb.GenreTypeId = movie.GenreTypeId;
-                movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.DateAdded = movie.DateAdded;
+                if (movieInDb.NumberInStock != movie.NumberInStock)
+                {
+                    movieInDb.NumberAvailable-= movieInDb.NumberInStock - movie.NumberInStock;
+                }
+                movieInDb.NumberInStock = movie.NumberInStock;
             }
 
             _context.SaveChanges();

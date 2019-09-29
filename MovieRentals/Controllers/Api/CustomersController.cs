@@ -9,6 +9,7 @@ using AutoMapper.QueryableExtensions;
 using MovieRentals.Dtos;
 using MovieRentals.Models;
 using System.Web.Http;
+using Microsoft.Ajax.Utilities;
 
 namespace MovieRentals.Controllers.Api
 {
@@ -28,12 +29,19 @@ namespace MovieRentals.Controllers.Api
 
         //Action to get customers
         //GET/Api/Customers
-        public IEnumerable<CustomerDto> GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            return _context.Customers
-                .Include(x=>x.MembershipType)
+            IQueryable<Customer> customersQuery = _context.Customers
+                .Include(x=>x.MembershipType);
+
+            if (!query.IsNullOrWhiteSpace())
+            {
+                customersQuery = customersQuery.Where(x => x.Name.Contains(query));
+            }
+            IEnumerable<CustomerDto> customerDtos = customersQuery
                 .ToList()
                 .Select(Mapper.Map<Customer,CustomerDto>);
+            return Ok(customerDtos);
         }
 
         //Action to get a single customer

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MovieRentals.ViewModels;
 using System.Data.Entity;
 using System.Web.UI.WebControls;
+using System.Runtime.Caching;
 
 namespace MovieRentals.Controllers
 {
@@ -29,6 +30,12 @@ namespace MovieRentals.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+            if (MemoryCache.Default["MembershipTypes"]==null)
+            {
+                MemoryCache.Default["MembershipTypes"] = _context.MembershipTypes.ToList();
+            } ;
+            IEnumerable<MembershipType> membershipTypes = (IEnumerable<MembershipType>)MemoryCache.Default["MembershipTypes"];
+
             //CustomersViewModel viewModel = new CustomersViewModel
             //{
             //    Customers = _context.Customers.Include(c => c.MembershipType).OrderBy(x=>x.Name).ToList()

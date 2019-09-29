@@ -8,6 +8,7 @@ using AutoMapper;
 using MovieRentals.Dtos;
 using MovieRentals.Models;
 using System.Data.Entity;
+using Microsoft.Ajax.Utilities;
 
 namespace MovieRentals.Controllers.Api
 {
@@ -29,9 +30,17 @@ namespace MovieRentals.Controllers.Api
         //Get movies
         //GET/api/movies
         [Authorize]
-        public IEnumerable<MovieDto> GetMovies()
+        public IHttpActionResult GetMovies(string query = null)
         {
-            return _context.Movies.Include(x=>x.Genre).ToList().Select(Mapper.Map<Movie, MovieDto>);
+            IQueryable<Movie> moviesQuery = _context.Movies.Include(x => x.Genre);
+
+            if (!query.IsNullOrWhiteSpace())
+            {
+                moviesQuery = moviesQuery.Where(x => x.Name.Contains(query)).Where(y=>y.NumberAvailable>0);
+            }
+
+            IEnumerable<MovieDto> movieDtos = moviesQuery.ToList().Select(Mapper.Map<Movie, MovieDto>);
+            return Ok(movieDtos);
         }
 
         //get movie by id

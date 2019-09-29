@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201909291533589_ExtendModelWithAvailabilityOfMovies_1.Designer.cs">
       <DependentUpon>201909291533589_ExtendModelWithAvailabilityOfMovies_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909292034254_ChangeNumberInStockMinimumTo0.cs" />
+    <Compile Include="Migrations\201909292034254_ChangeNumberInStockMinimumTo0.Designer.cs">
+      <DependentUpon>201909292034254_ChangeNumberInStockMinimumTo0.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -676,6 +680,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909291533589_ExtendModelWithAvailabilityOfMovies_1.resx">
       <DependentUpon>201909291533589_ExtendModelWithAvailabilityOfMovies_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909292034254_ChangeNumberInStockMinimumTo0.resx">
+      <DependentUpon>201909292034254_ChangeNumberInStockMinimumTo0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

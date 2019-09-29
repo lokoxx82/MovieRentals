@@ -31,8 +31,7 @@ namespace MovieRentals.Controllers.Api
         //GET/Api/Customers
         public IHttpActionResult GetCustomers(string query = null)
         {
-            IQueryable<Customer> customersQuery = _context.Customers
-                .Include(x=>x.MembershipType);
+            IQueryable<Customer> customersQuery = _context.Customers.Include(x=>x.MembershipType);
 
             if (!query.IsNullOrWhiteSpace())
             {

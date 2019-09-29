@@ -52,7 +52,8 @@
                 highlight:true
             }, {
                 name: 'customers',
-                display: 'name',
+                    display: 'name',
+                    limit: 8,
                 source: customers
                 }).on("typeahead:select", function(e, customer) {
                 vm.customerId = customer.id;
@@ -72,7 +73,8 @@
                 highlight:true
             }, {
                 name: 'movies',
-                display: 'name',
+                    display: 'name',
+                    limit: 8,
                 source: movies
             }).on("typeahead:select", function(e, movie) {
                 $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");

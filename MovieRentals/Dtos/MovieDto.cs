@@ -28,7 +28,7 @@ namespace MovieRentals.Dtos
         public DateTime DateAdded { get; set; }
 
         [Required]
-        [Range(1, 20)]
+        [Range(0, 20)]
         public int NumberInStock { get; set; }
 
         [Required]

@@ -290,6 +290,22 @@
     <Compile Include="Migrations\201909290905091_LogInExtendedByPhoneNumber.Designer.cs">
       <DependentUpon>201909290905091_LogInExtendedByPhoneNumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909291404496_ExtendModelWithRental.cs" />
+    <Compile Include="Migrations\201909291404496_ExtendModelWithRental.Designer.cs">
+      <DependentUpon>201909291404496_ExtendModelWithRental.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909291406040_ExtendModelWithRental_2.cs" />
+    <Compile Include="Migrations\201909291406040_ExtendModelWithRental_2.Designer.cs">
+      <DependentUpon>201909291406040_ExtendModelWithRental_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909291433371_ExtendModelWithRental_3.cs" />
+    <Compile Include="Migrations\201909291433371_ExtendModelWithRental_3.Designer.cs">
+      <DependentUpon>201909291433371_ExtendModelWithRental_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909291448375_ExtendModelWithRental_4.cs" />
+    <Compile Include="Migrations\201909291448375_ExtendModelWithRental_4.Designer.cs">
+      <DependentUpon>201909291448375_ExtendModelWithRental_4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -301,7 +317,7 @@
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Min18YersIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\NewRental.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -625,6 +641,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909290905091_LogInExtendedByPhoneNumber.resx">
       <DependentUpon>201909290905091_LogInExtendedByPhoneNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909291404496_ExtendModelWithRental.resx">
+      <DependentUpon>201909291404496_ExtendModelWithRental.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909291406040_ExtendModelWithRental_2.resx">
+      <DependentUpon>201909291406040_ExtendModelWithRental_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909291433371_ExtendModelWithRental_3.resx">
+      <DependentUpon>201909291433371_ExtendModelWithRental_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909291448375_ExtendModelWithRental_4.resx">
+      <DependentUpon>201909291448375_ExtendModelWithRental_4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

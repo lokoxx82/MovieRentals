@@ -10,18 +10,18 @@
     <div class="form-group">
         <label >Customer</label>
         <div class="tt-container">
-            <input id="customer" type="text" value="" class="form-control" />
+            <input id="customer" name="customer" data-rule-validCustomer="true" required="" type="text" value="" class="form-control" />
         </div>
     </div>
     <div class="form-group">
         <label >Movie</label>
         <div class="tt-container">
-            <input id="movie" type="text" class="form-control" value="" />
+            <input id="movie" name="movie" data-rule-atLeastOneMovie="true" type="text" class="form-control" value="" />
         </div>
     </div>
     <div class="row">
         <div class="col-md-3 col-sm-3">
-            <ul id="movies" class="list-group"></ul>
+            <ul id="movies" name="movies" class="list-group"></ul>
         </div>
     </div>
 
@@ -32,12 +32,14 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
             var vm = {
                 movieIds:[]
             };
 
+            //Filter customers
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -59,6 +61,7 @@
                 vm.customerId = customer.id;
                 });
 
+            //Filter movies
             var movies = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -83,21 +86,59 @@
 
             });
 
-            $("#newRental").submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                        url: "/api/rentals",
-                        method: "post",
-                        data: vm
-                    })
-                    .done(function() {
-                        console.log("done");
-                    })
-                    .fail(function() {
-                        console.log("fail");
-                    });
+            //Add custom validation to list of movies - at least 1
+            $.validator.addMethod("atLeastOneMovie", function() {
+                return vm.movieIds.length > 0;
+            },"Please select at least one movie");
 
+            //Add custom validator - if some tet is in customer but its not a valid customer
+            $.validator.addMethod("validCustomer", function() {
+                return vm.customerId && vm.customerId !== 0;
+            },"Please select a valid customer");
+
+            //Apply validation to the form
+            var validator = $("#newRental").validate({
+                submitHandler: function () {
+                    //Submit the form if validation is ok
+                    $.ajax({
+                            url: "/api/rentals",
+                            method: "post",
+                            data: vm
+                        })
+                        .done(function() {
+                            toastr.success("Rentals succesfully recorded.");
+                            //Reset the form to empty
+                            $("#customer").typeahead("val", "");
+                            $("#movie").typeahead("val", "");
+                            $("#movies").empty();
+                            //Reset viewModel
+                            vm = { movieIds: [] };
+                            //Reset the validator
+                            validator.resetForm();
+                        })
+                        .fail(function() {
+                            toastr.error("Rentals recording failed.");
+                        });
+                    return false;
+                }
             });
+
+            ////submiting the form
+            //$("#newRental").submit(function(e) {
+            //    e.preventDefault();
+            //    $.ajax({
+            //            url: "/api/rentals",
+            //            method: "post",
+            //            data: vm
+            //        })
+            //        .done(function() {
+            //            toastr.success("Rentals succesfully recorded.");
+            //        })
+            //        .fail(function() {
+            //            toastr.error("Rentals recording failed.");
+            //        });
+
+            //});
         });
     </script>
 }

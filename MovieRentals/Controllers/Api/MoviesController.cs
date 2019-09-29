@@ -32,11 +32,11 @@ namespace MovieRentals.Controllers.Api
         [Authorize]
         public IEnumerable<MovieDto> GetMovies(string query = null)
         {
-            IQueryable<Movie> moviesQuery = _context.Movies.Include(x => x.Genre).Where(y => y.NumberAvailable > 0);
+            IQueryable<Movie> moviesQuery = _context.Movies.Include(x => x.Genre);
 
             if (!query.IsNullOrWhiteSpace())
             {
-                moviesQuery = moviesQuery.Where(x => x.Name.Contains(query));
+                moviesQuery = moviesQuery.Where(x => x.Name.Contains(query)).Where(y => y.NumberAvailable > 0);
             }
 
             return moviesQuery

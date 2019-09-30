@@ -17,5 +17,10 @@ namespace MovieRentals.Controllers
             return View();
         }
 
+        public ActionResult About()
+        {
+            throw  new Exception();
+            return Content("");
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace MovieRentals
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-theme1.css",
                       "~/content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/typeahead.css",
